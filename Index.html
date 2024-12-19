@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quality Section Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            background: #2c3e50;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            margin-left: 270px;
+            padding: 20px;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+        }
+
+        .form-group input, .form-group select {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .charts {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .chart {
+            width: 48%;
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-dark-mode {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+
+        .toggle-dark-mode button {
+            padding: 10px;
+            background: #16a085;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .toggle-dark-mode button:hover {
+            background: #1abc9c;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#">Home</a>
+        <a href="#">Overview</a>
+        <a href="#">Store Section</a>
+        <a href="#">Cutting Section</a>
+        <a href="#">Production Section</a>
+        <a href="#">Quality Section</a>
+        <a href="#">Finishing Section</a>
+        <a href="#">Dispatch Section</a>
+        <a href="#">Settings</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Help</a>
+        <div class="toggle-dark-mode">
+            <button>Dark Mode</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <h2 class="section-heading">Quality Section</h2>
+        <div class="charts">
+            <div class="chart">
+                <h3>Pie Chart</h3>
+                <canvas id="pieChart"></canvas>
+            </div>
+            <div class="chart">
+                <h3>Bar Chart</h3>
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="form-group">
+                <label for="styleNo">Style Number</label>
+                <input type="text" id="styleNo" placeholder="Enter Style Number">
+            </div>
+            <div class="form-group">
+                <label for="buyerName">Buyer Name</label>
+                <input type="text" id="buyerName" placeholder="Enter Buyer Name">
+            </div>
+            <div class="form-group">
+                <label for="graphRange">Graph Data Range</label>
+                <select id="graphRange">
+                    <option value="lastWeek">Last Week</option>
+                    <option value="lastMonth">Last Month</option>
+                    <option value="lastYear">Last Year</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="totalQuantity">Total Quantity</label>
+                <input type="number" id="totalQuantity" placeholder="Enter Total Quantity">
+            </div>
+            <div class="form-group">
+                <label for="passedPieces">Total Passed Pieces</label>
+                <input type="number" id="passedPieces" placeholder="Enter Total Passed Pieces">
+            </div>
+            <div class="form-group">
+                <label for="returnedPieces">Number of Returned Pieces</label>
+                <input type="number" id="returnedPieces" placeholder="Enter Number of Returned Pieces">
+            </div>
+            <div class="form-group">
+                <label for="remarks">Remarks</label>
+                <input type="text" id="remarks" placeholder="Enter Remarks">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const barCtx = document.getElementById('barChart').getContext('2d');
+
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['S', 'M', 'L', 'XL', 'XXL', 'Other'],
+                datasets: [{
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#cc65fe', '#ffce56', '#2ecc71', '#e74c3c'],
+                }]
+            }
+        });
+
+        const barChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['S', 'M', 'L', 'XL', 'XXL', 'Other'],
+                datasets: [{
+                    label: 'Quantities',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: '#3498db',
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
